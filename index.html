@@ -255,6 +255,73 @@ document.body.style.overflow="auto";
 
 },3000);
 
+  function openChat(){
+
+document.getElementById("app").style.display="none";
+document.getElementById("chatPage").style.display="block";
+
+}
+
+function backHome(){
+
+document.getElementById("chatPage").style.display="none";
+document.getElementById("app").style.display="block";
+
+}
+
+function sendMessage(){
+
+let input=document.getElementById("userInput");
+
+let text=input.value.trim();
+
+if(text==="") return;
+
+let box=document.getElementById("chatBox");
+
+box.innerHTML += `
+<br><br>
+<div style="text-align:right;">
+<b>Anda:</b><br>
+${text}
+</div>
+`;
+
+let reply="Maaf, saya belum memahami pertanyaan itu.";
+
+let pesan=text.toLowerCase();
+
+if(pesan.includes("halo"))
+reply="Halo! Selamat datang di Ast. AI FASZ 👋";
+
+else if(pesan.includes("siapa kamu"))
+reply="Saya Ast. AI FASZ, asisten virtual sederhana 🚀";
+
+else if(pesan.includes("astronomi"))
+reply="Astronomi adalah ilmu yang mempelajari benda langit dan alam semesta 🌌";
+
+else if(pesan.includes("terima kasih"))
+reply="Sama-sama! Senang membantu 🚀";
+
+setTimeout(()=>{
+
+box.innerHTML += `
+<br><br>
+<div>
+<b>Ast. AI:</b><br>
+${reply}
+</div>
+`;
+
+box.scrollTop=box.scrollHeight;
+
+},500);
+
+input.value="";
+
+box.scrollTop=box.scrollHeight;
+
+  }
 </script>
 
 </body>
