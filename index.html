@@ -121,7 +121,63 @@ color:#7ED3FF;
 
 </style>
 </head>
+<div id="chatPage" style="display:none;padding:20px;height:100vh;">
 
+<button onclick="backHome()" style="
+background:#3D8BFF;
+border:none;
+color:white;
+padding:10px 15px;
+border-radius:10px;
+margin-bottom:15px;
+">
+⬅ Kembali
+</button>
+
+<h2>🤖 Ast. AI</h2>
+
+<div id="chatBox" style="
+height:60vh;
+overflow-y:auto;
+background:#0D1738;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+margin-bottom:15px;
+">
+<div>
+<b>Ast. AI:</b><br>
+Halo 👋 Apa yang ingin Anda lakukan hari ini?
+</div>
+</div>
+
+<div style="display:flex;gap:10px;">
+
+<input
+id="userInput"
+placeholder="Tulis pesan..."
+style="
+flex:1;
+padding:12px;
+border-radius:10px;
+border:none;
+">
+
+<button
+onclick="sendMessage()"
+style="
+padding:12px 18px;
+background:#3D8BFF;
+border:none;
+color:white;
+border-radius:10px;
+">
+📤
+</button>
+
+</div>
+
+</div>
 <body>
 
 <div id="loading">
@@ -158,7 +214,7 @@ Developed and Created by<br>
 Fadillah S.A.,z
 </div>
 
-<div class="card">
+<div class="card" onclick="openChat()">
 <h3>🤖 Mulai Obrolan</h3>
 <p>Mulai berbicara dengan Ast. AI</p>
 </div>
