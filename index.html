@@ -1,1182 +1,205 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ast. AI FASZ v1.0</title>
-
-<link rel="icon" href="logo-fasz.png">
-
+<title>Ast. AI FASZ</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
-
 
 body{
-
-    background:#050B1F;
-    color:white;
-    min-height:100vh;
-    overflow-x:hidden;
-
+background:#050B1F;
+color:white;
+overflow:hidden;
 }
 
-
-
-/* BACKGROUND BINTANG */
-
-
-body::before{
-
-content:"";
-
-position:fixed;
-
-width:100%;
-height:100%;
-
-background-image:
-
-radial-gradient(#ffffff 1px,transparent 1px);
-
-background-size:45px 45px;
-
-opacity:.25;
-
-animation:stars 30s linear infinite;
-
-z-index:-2;
-
-}
-
-
-
-@keyframes stars{
-
-from{
-transform:translateY(0);
-}
-
-to{
-transform:translateY(-300px);
-}
-
-}
-
-
-
-
-/* LOADING SCREEN */
-
+/* Loading */
 
 #loading{
-
 position:fixed;
-
-width:100%;
-height:100%;
-
+inset:0;
 background:#050B1F;
-
 display:flex;
-
-justify-content:center;
-
-align-items:center;
-
 flex-direction:column;
-
+justify-content:center;
+align-items:center;
 z-index:999;
+}
 
+.loading-logo{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+animation:spin 8s linear infinite;
+box-shadow:0 0 25px #3D8BFF;
+}
 
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+.loading-title{
+font-size:32px;
+margin-top:15px;
+font-weight:bold;
+}
+
+.loading-sub{
+margin-top:10px;
+color:#7ED3FF;
+}
+
+/* App */
+
+#app{
+display:none;
+padding:20px;
+height:100vh;
+overflow-y:auto;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+font-size:32px;
+margin-bottom:25px;
 }
 
 .logo{
-    width:90px;
-    height:90px;
-    margin:0 auto 15px;
-}
-background:none;
-padding:0;
-box-shadow:
-0 0 25px #3D8BFF,
-0 0 50px #3D8BFF44;
-animation:rotateLogo 15s linear infinite;
-}
-
-
-
-
-@keyframes rotateLogo{
-
-0%{
-transform:rotate(0deg);
-}
-
-
-100%{
-transform:rotate(360deg);
-}
-
-}
-
-
-
-.loading-title{
-
-margin-top:25px;
-
-font-size:30px;
-
-}
-
-
-
-.loading-text{
-
-margin-top:8px;
-
-color:#7ED3FF;
-
-}
-
-
-
-
-
-/* APP */
-
-
-#app{
-
-display:none;
-
-max-width:430px;
-
-margin:auto;
-
-padding:20px;
-
-}
-
-
-
-.topbar{
-
-display:flex;
-
-justify-content:space-between;
-
-font-size:25px;
-
-}
-
-
-
-.center{
-
 text-align:center;
-
-margin-top:30px;
-
-}
-
-
-
-.center .logo{
-
-width:105px;
-height:105px;
-
-font-size:26px;
-
-margin:auto;
-
-}
-
-
-
-.title{
-
-font-size:24px;
-
-margin-top:15px;
-
-}
-
-
-
-.credit{
-
-color:#aeb8d5;
-
-font-size:13px;
-
-margin-top:8px;
-
-}
-
-
-
-
-
-/* CARD */
-
-
-.card{
-
-background:#0D1738;
-
-border-radius:20px;
-
-padding:18px;
-
-margin-top:15px;
-
-border:1px solid #263765;
-
-transition:.3s;
-
-cursor:pointer;
-
-}
-
-
-
-.card:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-
-0 0 25px #3D8BFF44;
-
-}
-
-
-
-
-.card h3{
-
-margin-bottom:8px;
-
-}
-
-
-
-.card p{
-
-color:#b9c5e8;
-
-font-size:14px;
-
-}
-
-
-
-
-/* BUTTON */
-
-
-button{
-
-background:#3D8BFF;
-
-border:none;
-
-padding:12px 22px;
-
-border-radius:20px;
-
-color:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
-margin-top:10px;
-
-}
-
-
-
-
-/* FOOTER */
-
-
-.footer{
-
-text-align:center;
-
-margin-top:30px;
-
-color:#7ED3FF;
-
-font-size:14px;
-
-}
-
-
-
-
-
-/* PAGE */
-
-
-.page{
-
-display:none;
-
-max-width:430px;
-
-margin:auto;
-
-padding:20px;
-
-animation:fade .3s;
-
-}
-
-
-
-@keyframes fade{
-
-from{
-
-opacity:0;
-transform:translateY(20px);
-
-}
-
-
-to{
-
-opacity:1;
-transform:none;
-
-}
-
-}
-
-
-
-
-.header{
-
-font-size:22px;
-
-margin-bottom:20px;
-
-}
-
-
-.header{
-
-font-size:22px;
-
-margin-bottom:20px;
-
 }
 
 .logo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-    display:block;
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 0 25px #3D8BFF;
 }
 
+.title{
+text-align:center;
+font-size:24px;
+margin-top:15px;
+font-weight:bold;
+}
+
+.credit{
+text-align:center;
+margin-top:8px;
+color:#cfcfcf;
+line-height:1.5;
+}
+
+.card{
+background:#0D1738;
+padding:20px;
+border-radius:20px;
+margin-top:18px;
+cursor:pointer;
+border:1px solid #1f3479;
+}
+
+.card h3{
+margin-bottom:8px;
+}
+
+.footer{
+text-align:center;
+margin:30px 0;
+color:#7ED3FF;
+}
 
 </style>
-
-<script>
-window.onload = function() {
-    setTimeout(() => {
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("app").style.display = "block";
-    }, 2500);
-}
-</script>
-<body>
-
-
-
 </head>
 
-
-<!-- LOADING -->
+<body>
 
 <div id="loading">
-    ...
-</div>
 
-<div id="app" style="display:none;">
-    ...
-</div>
-
-
-<div class="logo">
-    <img src="logo-fasz.jpeg" alt="FASZ Logo">
-</div>
-
+<img src="logo-fasz.jpeg" class="loading-logo">
 
 <div class="loading-title">
 Ast. AI
 </div>
 
-
-<div class="loading-text">
+<div class="loading-sub">
 Memuat Sistem...
 </div>
 
-
-
 </div>
-
-
-
-
-
-<!-- DASHBOARD -->
-
 
 <div id="app">
 
-
 <div class="topbar">
-
-<div onclick="openMenu()">
-☰
+<div>☰</div>
+<div>👤</div>
 </div>
-
-
-<div onclick="profile()">
-👤
-</div>
-
-
-</div>
-
-
-
-
-<div class="center">
-
 
 <div class="logo">
-    <img src="logo-fasz.jpeg" alt="FASZ Logo">
+<img src="logo-fasz.jpeg">
 </div>
-
 
 <div class="title">
 Ast. AI. F.S.A.,z
 </div>
 
-
 <div class="credit">
-
 Developed and Created by<br>
-
 Fadillah S.A.,z
-
 </div>
 
-
+<div class="card">
+<h3>🤖 Mulai Obrolan</h3>
+<p>Mulai berbicara dengan Ast. AI</p>
 </div>
 
-
-
-
-
-<div class="card" onclick="chatPage()">
-
-<h3>
-🤖 Mulai Obrolan
-</h3>
-
-<p>
-Berinteraksi dengan Ast. AI
-</p>
-
+<div class="card">
+<h3>📂 Proyek Saya</h3>
+<p>Belum ada proyek</p>
 </div>
 
-
-
-
-
-<div class="card" onclick="projectPage()">
-
-
-<h3>
-📂 Proyek Saya
-</h3>
-
-
-<p>
-Belum ada proyek
-</p>
-
-
+<div class="card">
+<h3>📚 Riwayat</h3>
+<p>Riwayat aktivitas</p>
 </div>
 
-
-
-
-
-<div class="card" onclick="obsPage()">
-
-
-<h3>
-🔭 Observasi
-</h3>
-
-
-<p>
-Catatan astronomi
-</p>
-
-
+<div class="card">
+<h3>ℹ️ Tentang</h3>
+<p>Informasi aplikasi</p>
 </div>
 
-
-
-
-
-<div class="card" onclick="historyPage()">
-
-
-<h3>
-📚 Riwayat
-</h3>
-
-
-<p>
-Aktivitas terakhir
-</p>
-
-
+<div class="card">
+<h3>⚙️ Pengaturan</h3>
+<p>Preferensi pengguna</p>
 </div>
-
-
-
-
-
-<div class="card" onclick="aboutPage()">
-
-
-<h3>
-ℹ Tentang
-</h3>
-
-
-<p>
-Informasi Ast. AI FASZ
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="card" onclick="settingPage()">
-
-
-<h3>
-⚙ Pengaturan
-</h3>
-
-
-<p>
-Atur aplikasi
-</p>
-
-
-</div>
-
-
-
-
 
 <div class="footer">
-
 Ast. AI FASZ v1.0
+</div>
 
 </div>
 
-
-
-
-</div>
-<!-- CHAT PAGE -->
-
-<div id="chatPage" class="page">
-
-<div class="header">
-🤖 Ast. AI
-</div>
-
-
-<div class="card">
-
-<p style="color:white;font-size:16px">
-
-Halo 👋<br><br>
-
-Apa yang ingin Anda lakukan hari ini?
-
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-💬 Tanya sesuatu...
-
-</div>
-
-
-<button>
-📤 Kirim
-</button>
-
-
-<br><br>
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-</div>
-
-
-
-
-
-<!-- PROJECT PAGE -->
-
-
-<div id="projectPage" class="page">
-
-
-<div class="header">
-📂 Proyek Saya
-</div>
-
-
-
-<div class="card" style="text-align:center">
-
-
-<h1>
-🚀
-</h1>
-
-
-<p style="font-size:18px;color:white">
-
-Belum ada<br>
-proyek
-
-</p>
-
-
-
-<button>
-+ Buat Proyek
-</button>
-
-
-</div>
-
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- OBSERVATION PAGE -->
-
-
-<div id="obsPage" class="page">
-
-
-<div class="header">
-🔭 Observasi
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Catatan Astronomi
-</h3>
-
-
-<p>
-
-Belum ada catatan observasi.
-
-</p>
-
-
-<button>
-+ Tambah Catatan
-</button>
-
-
-</div>
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- HISTORY PAGE -->
-
-
-<div id="historyPage" class="page">
-
-
-<div class="header">
-📚 Riwayat
-</div>
-
-
-
-
-<div class="card">
-
-
-<p>
-
-Belum ada aktivitas.
-
-</p>
-
-
-</div>
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- PROFILE PAGE -->
-
-
-<div id="profilePage" class="page">
-
-
-<div class="header">
-👤 Profil
-</div>
-
-
-
-
-<div class="card" style="text-align:center">
-
-
-<div class="logo" style="margin:auto">
-
-FASZ
-
-</div>
-
-
-
-<h2>
-Fadillah S.A.,z
-</h2>
-
-
-
-<p>
-Creator of Ast. AI FASZ
-</p>
-
-
-
-</div>
-
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- ABOUT PAGE -->
-
-
-<div id="aboutPage" class="page">
-
-
-<div class="header">
-ℹ Tentang
-</div>
-
-
-
-
-<div class="card">
-
-
-<h3>
-Ast. AI FASZ
-</h3>
-
-
-
-<p>
-
-Ast. AI FASZ adalah konsep AI
-berbasis astronomi dan teknologi
-yang dikembangkan oleh Fadillah S.A.,z.
-
-</p>
-
-
-<br>
-
-
-<p>
-
-Versi:
-<br>
-
-Ast. AI FASZ v1.0
-
-</p>
-
-
-
-</div>
-
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- SETTINGS PAGE -->
-
-
-<div id="settingPage" class="page">
-
-
-<div class="header">
-⚙ Pengaturan
-</div>
-
-
-
-
-<div class="card">
-
-
-<h3>
-Tampilan
-</h3>
-
-
-<p>
-
-Mode:
-🌌 Dark Space
-
-</p>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Tentang Sistem
-</h3>
-
-
-<p>
-
-Ast. AI FASZ v1.0
-
-</p>
-
-
-</div>
-
-
-
-<button onclick="home()">
-⬅ Kembali
-</button>
-
-
-</div>
 <script>
 
-
-// LOADING SCREEN
-
-setTimeout(()=>{
+setTimeout(function(){
 
 document.getElementById("loading").style.display="none";
-
 document.getElementById("app").style.display="block";
-
+document.body.style.overflow="auto";
 
 },3000);
 
-
-
-
-
-// SEMBUNYIKAN SEMUA PAGE
-
-function hideAll(){
-
-document.getElementById("app").style.display="none";
-
-
-let pages=document.querySelectorAll(".page");
-
-
-pages.forEach(page=>{
-
-page.style.display="none";
-
-});
-
-
-}
-
-
-
-
-
-// KEMBALI HOME
-
-function home(){
-
-hideAll();
-
-document.getElementById("app").style.display="block";
-
-
-}
-
-
-
-
-
-// CHAT
-
-function chatPage(){
-
-hideAll();
-
-document.getElementById("chatPage").style.display="block";
-
-
-}
-
-
-
-
-
-// PROJECT
-
-function projectPage(){
-
-hideAll();
-
-document.getElementById("projectPage").style.display="block";
-
-
-}
-
-
-
-
-
-// OBSERVASI
-
-function obsPage(){
-
-hideAll();
-
-document.getElementById("obsPage").style.display="block";
-
-
-}
-
-
-
-
-
-// HISTORY
-
-function historyPage(){
-
-hideAll();
-
-document.getElementById("historyPage").style.display="block";
-
-
-}
-
-
-
-
-
-// PROFILE
-
-function profile(){
-
-hideAll();
-
-document.getElementById("profilePage").style.display="block";
-
-
-}
-
-
-
-
-
-// ABOUT
-
-function aboutPage(){
-
-hideAll();
-
-document.getElementById("aboutPage").style.display="block";
-
-
-}
-
-
-
-
-
-// SETTINGS
-
-function settingPage(){
-
-hideAll();
-
-document.getElementById("settingPage").style.display="block";
-
-
-}
-
-
-
-
-
-// MENU
-
-function openMenu(){
-
-alert(
-
-"🚀 Ast. AI FASZ Menu\n\n"+
-
-"🤖 Obrolan\n"+
-
-"📂 Proyek\n"+
-
-"🔭 Observasi\n"+
-
-"📚 Riwayat\n"+
-
-"👤 Profil\n"+
-
-"⚙ Pengaturan"
-
-);
-
-
-}
-
-
-
 </script>
 
-
 </body>
-
 </html>
