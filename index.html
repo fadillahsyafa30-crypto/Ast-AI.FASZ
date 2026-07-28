@@ -187,9 +187,9 @@ border-radius:10px;
 <div class="loading-title">
 Ast. AI
 </div>
-
-<div class="loading-sub">
-Memuat Sistem...
+<div class="loading-title">FASZ</div>
+<div class="loading-subtitle">Ast. AI</div>
+<div class="loading-text">Menginisialisasi Sistem...</div>
 </div>
 
 </div>
@@ -247,13 +247,16 @@ Ast. AI FASZ v1.0
 
 <script>
 
-setTimeout(function(){
+setTimeout(() => {
 
-document.getElementById("loading").style.display="none";
-document.getElementById("app").style.display="block";
-document.body.style.overflow="auto";
+  document.getElementById("loading").style.opacity = "0";
 
-},3000);
+  setTimeout(() => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  }, 800);
+
+}, 5000);
 
   function openChat(){
 
